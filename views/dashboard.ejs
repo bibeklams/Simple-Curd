@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head><title>Dashboard</title></head>
+<body>
+  <h1>Welcome, <%= username %> 👋</h1>
+  <p>Email: <%= email %></p>
+  <a href="/add-note">Add Note</a> |
+  <a href="/logout">Logout</a>
+  <hr>
+
+  <h2>Your Notes</h2>
+  <% if (notes.length === 0) { %>
+    <p>No notes yet.</p>
+  <% } else { %>
+    <ul>
+      <% notes.forEach(note => { %>
+        <li>
+          <strong><%= note.title %></strong> - <%= note.content %>
+          <form action="/delete/<%= note._id %>" method="POST" style="display:inline;">
+            <button type="submit">Delete</button>
+          </form>
+          <a href="/update/<%= note._id %>">Edit</a>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</body>
+</html>
